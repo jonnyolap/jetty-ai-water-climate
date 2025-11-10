@@ -2,7 +2,7 @@
 
 ## Final Notebook
 
-Access the final analysis and model results here: [01_Water_Quality_Analysis.ipynb](../../../notebooks/water-climate/1.0-Water-Quality-Data-Acquisition.ipynb)
+Access the final analysis and model results here: [01_Water_Quality_Analysis.ipynb](notebooks/1.0-Water-Quality-Data-Acquisition.ipynb)
 
 ---
 
