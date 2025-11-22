@@ -6,7 +6,7 @@
 
 Status: **Model Optimization Complete.** The classification model has been rigorously validated and tuned to achieve **100% Safety (Recall)**, successfully addressing all critical flaws identified in peer review.
 
-Access the final analysis, advanced validation, and model results here: [01\_Water\_Quality\_Analysis.ipynb](https://www.google.com/search?q=notebooks/1.0-Water-Quality-Data-Acquisition.ipynb)
+Access the final analysis, advanced validation, and model results here: https://github.com/jonnyolap/jetty-ai-water-climate/blob/main/notebooks/1.0-Water-Quality-Data-Acquisition.ipynb
 
 -----
 
