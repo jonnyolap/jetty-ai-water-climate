@@ -1,36 +1,55 @@
-## 📝 Revised README Content
+# 🌧️ Project Status: Rainfall Forecasting Model
 
-### \# Project 1: Water Quality AI
+**Status: Model Optimization Complete.** The time series model has been rigorously re-engineered using multivariate regression to achieve a **$27.5\%$ reduction in prediction error**, successfully addressing the limitations of the baseline Prophet model.
 
-## Project Status:
+Access the final analysis, advanced validation, and model results in the notebook: [2.0-Rainfall-Forecasting.ipynb](2.0-Rainfall-Forecasting.ipynb)
 
-Status: **Model Optimization Complete.** The classification model has been rigorously validated and tuned to achieve **100% Safety (Recall)**, successfully addressing all critical flaws identified in peer review.
+***
 
-Access the final analysis, advanced validation, and model results here: [01_Water_Quality_Analysis.ipynb](notebooks/1.0-Water-Quality-Data-Acquisition.ipynb)
------
+## 🔬 Final Model Validation and Multivariate Optimization
 
-## 🔬 Final Model Validation and Safety Optimization
+The initial **Prophet** model suffered from a structural flaw: it ignored physical climate drivers, resulting in a high Mean Absolute Error (MAE) of $80.94\text{ mm}$. This final version replaces the univariate model with a powerful **XGBoost Regressor**, successfully training the model on both time and climate features.
 
-The original model suffered from critical flaws (low Recall and improper validation). This final version replaces the baseline model with a **Random Forest Classifier** and uses advanced techniques to prioritize public health safety.
-
-### **Key Technical Improvements:**
+### Key Technical Improvements:
 
 | Feature | Technical Implementation | Rationale |
 | :--- | :--- | :--- |
-| **Validation Method** | **Walk-Forward Time Series Cross-Validation** | Replaced simple splits to ensure accurate performance metrics on **future, unseen data**, preventing data leakage. |
-| **Class Imbalance Fix** | **SMOTE (Synthetic Minority Oversampling Technique)** | Corrected the severe class imbalance in the training data, which was the root cause of the low Recall. |
-| **Safety Optimization** | **Decision Threshold Tuning (Final Step)** | The final model was tuned using a threshold of **$\mathbf{0.08}$** to maximize the safety metric (Recall). |
+| **Model Transition** | **XGBoost Regressor (Multivariate)** | Shifted from time-only modeling to advanced regression to capture complex, non-linear relationships between climate variables and rainfall. |
+| **Feature Engineering** | **Lagged Rainfall (1M, 3M, 6M, 12M)** | Provided essential historical context, which is a key predictor in time series forecasting. |
+| **Exogenous Variables** | **Specific Humidity, Relative Humidity, Temperature** | Introduced the physical drivers of rainfall, correcting the structural inadequacy of the simple Prophet model. |
+| **Forecasting Method** | **Recursive Prediction** | Ensured future forecasts are generated step-by-step, using the model's own previous prediction as the lagged input for the next step, improving forecast reliability. |
 
-### **Final Performance Result (Highest Safety Configuration)**
+***
 
-The model configuration was specifically chosen to achieve maximum Recall, accepting a necessary trade-off in Precision to ensure public safety.
+## 📊 Final Performance Result (XGBoost vs. Prophet)
 
-| Metric | Score (Threshold at $\mathbf{0.08}$) | Interpretation |
+The XGBoost model configuration was specifically chosen to minimize overall prediction error (MAE) on the 48-month test set (2017–2020), demonstrating a clear improvement over the baseline.
+
+| Metric | Prophet (Baseline) | **XGBoost (Final)** | Interpretation |
+| :--- | :--- | :--- | :--- |
+| **Mean Absolute Error (MAE)** | $80.94\text{ mm}$ | **$58.68\text{ mm}$** | **$27.5\%$ error reduction.** On average, the XGBoost model's prediction is off by only $58.68\text{ mm}$ (a significant gain). |
+| **Root Mean Squared Error (RMSE)** | $144.63\text{ mm}$ | **$120.67\text{ mm}$** | Better control over large errors (e.g., missed monsoon peaks). |
+
+### Feature Drivers
+
+Feature Importance Analysis confirmed the model's predictive power is overwhelmingly driven by climate physics:
+
+| Feature | Importance | Role |
 | :--- | :--- | :--- |
-| **Recall** (Unsafe Class) | $\mathbf{1.00}$ (100%) | **ZERO FALSE NEGATIVES.** The model successfully identifies every truly unsafe water sample. **(Critical Safety Requirement Met)** |
-| **Precision** (Unsafe Class) | $\mathbf{0.544}$ (54.4%) | When the model raises an alarm, it is correct $54.4\%$ of the time. The remaining $45.6\%$ are false alarms, a necessary cost for $100\%$ safety. |
-| **Feature Drivers** | **pH** and **Solids** | Feature Importance Analysis confirmed these as the model's most critical chemical predictors. |
+| **Specific Humidity** | **$73.8\%$** | **The dominant predictor.** Confirms the model is primarily learning from the actual water vapor content in the air. |
+| `Month_sin` | $8.8\%$ | Captures the general seasonal timing. |
+| `Rainfall_Lag_12M` | $2.3\%$ | Provides minimal long-term historical context. |
 
-## Deployment Strategy:
+***
 
-Next Phase: The final, validated, and optimized Random Forest model is now ready for deployment. The focus shifts to containerization (Docker) and MLOps pipeline construction on the dedicated DigitalOcean MLOps Droplet.
+## 🚀 Deployment Strategy:
+
+Next Phase: The highly accurate, validated XGBoost Regressor is now ready for deployment. The focus shifts entirely to **MLOps principles**:
+
+* Model Serialization: Saving the trained `xgb_model` using `joblib`.
+* Containerization: Wrapping the model and its required Feature Engineering logic within a **Docker** container.
+* API Development: Creating an API endpoint (e.g., using FastAPI) to receive future climate inputs and return the 12-month rainfall forecast.
+* Integration: Preparing the output to be used as a key exogenous feature for the **Water Quality Risk Model** (Phase 4).
+
+---
+
