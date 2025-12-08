@@ -2,7 +2,7 @@
 
 **Status: Model Optimization Complete.** The time series model has been rigorously re-engineered using multivariate regression to achieve a **$27.5\%$ reduction in prediction error**, successfully addressing the limitations of the baseline Prophet model.
 
-Access the final analysis, advanced validation, and model results in the notebook: [2.0-Rainfall-Forecasting.ipynb](2.0-Rainfall-Forecasting.ipynb)
+Access the final analysis, advanced validation, and model results in the notebook: [2.0-Rainfall-Forecasting.ipynb](./notebooks/2.0-Rainfall-Forecasting.ipynb)
 
 ***
 
