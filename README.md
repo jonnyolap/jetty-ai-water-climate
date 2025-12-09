@@ -53,3 +53,6 @@ Next Phase: The highly accurate, validated XGBoost Regressor is now ready for de
 
 ---
 
+---
+## 📚 Project Documentation Archive
+* **Phase 1: Water Quality Analysis (1.0)** - [View Detailed Project Summary and Validation](./notebooks/1.0-Water-Quality-Data-Acquisition.ipynb)
